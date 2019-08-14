@@ -1,0 +1,125 @@
+<div class="container" rtl>
+  <h1 *ngIf="authName$ | async">{{authName$ | async}}</h1>
+  <h2>Articles, considérations et l'affirmation de la constitution</h2>
+  <h3>À travailler</h3>
+  <h3 *ngIf="myLogos.length == 0">Veuillez patientez (quelques secondes (10 secondes maximum!))</h3>
+  <div class="row">
+    <div class="col-md-6">
+
+      <mat-card *ngFor="let book of myLogos;let i = index; trackBy:trackByIndex;"
+         data-testid="crud-item"
+        [ngClass]="myLogos[i].style + ' routeAnimationsElements'" >
+        <img mat-card-image [src]="book.url_img" [alt]="book.texte" (click)="select(book)">
+        <div class="flex">
+          <h4  class="col-sm-10" data-testid="item-title">{{book.texte}}</h4>
+          <mat-slider class="col-sm-2"
+          class="example-margin"
+          [max]="5"
+          [min]="0"
+          [step]="1"
+          [thumbLabel]="true"
+          [tickInterval]="1"
+          [vertical]="true"
+          [(ngModel)]="book.niveauDaccord"
+          >
+          </mat-slider>
+        </div>
+        <mat-form-field class="example-full-width">
+          <textarea matInput maxlength="300" name="text-{{i}}"  placeholder="Commentaires"  [(ngModel)]="book.commentaire"></textarea>
+        </mat-form-field>
+        <button mat-raised-button (click)="launch(book)">Envoyer</button>
+      </mat-card>
+
+    </div>
+    <div class="col-md-6">
+      <div id="addButton">
+        <button type="button" mat-fab color="primary" class="add" [ngClass]="routeAnimationsElements"
+        *ngIf="!isEditing" (click)="addNew(bookForm)" data-testid="add-crud">
+        <fa-icon icon="plus"></fa-icon>
+      </button>
+    </div>
+
+      <span class="d-flex justify-content-between">
+        <span class="d-flex justify-content-end">
+          <span *ngIf="selectedLogo$ | async as selectedLogo">
+            <button mat-icon-button color="accent" *ngIf="!isEditing" data-testid="edit-crud">
+              <fa-icon icon="edit" (click)="edit(selectedLogo)" [matTooltip]="'anms.examples.crud.tooltip.edit' | translate"
+                matTooltipPosition="above">
+              </fa-icon>
+            </button>
+            <!--
+            <button mat-icon-button color="accent" (click)="like(selectedLogo)" *ngIf="!isEditing" data-testid="edit-crud">
+              <mat-icon aria-hidden="false"  aria-label="Example home icon">favorite</mat-icon>
+            </button>
+            -->
+            <button mat-icon-button color="warn" (click)="delete(selectedLogo)" data-testid="delete-crud">
+              <fa-icon icon="trash" [matTooltip]="'anms.examples.crud.tooltip.delete' | translate"
+                matTooltipPosition="above">
+              </fa-icon>
+            </button>
+            <button mat-icon-button (click)="deselect()">
+              <fa-icon icon="times" [matTooltip]="'anms.examples.crud.tooltip.deselect' | translate"
+                matTooltipPosition="above">
+              </fa-icon>
+            </button>
+            <img *ngIf="!isEditing" mat-card-image [src]="selectedLogo.url_img" [alt]="selectedLogo.texte" >
+          </span>
+
+        </span>
+      </span>
+
+      <form #bookForm="ngForm" [formGroup]="logoFormGroup" [style.display]="isEditing ? 'block' : 'none'"
+        [ngClass]="routeAnimationsElements">
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-card>
+              <input matInput placeholder="{{ 'anms.examples.crud.placeholder1' | translate }}"
+              formControlName="texte" required autofocus>
+              <mat-error *ngIf="logoFormGroup.get('texte').invalid" >
+                Un titre est necessaire
+              </mat-error>
+
+            </mat-card>
+
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="col">
+            <mat-card>
+              <input matInput placeholder="url image"
+              formControlName="url_img" required autofocus>
+              <mat-error *ngIf="logoFormGroup.get('url_img').invalid">
+                L'url deu logo est necessaire
+              </mat-error>
+
+            </mat-card>
+
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <div class="col-12 d-flex justify-content-between">
+            <button (click)="save()" mat-raised-button color="primary">
+              {{'anms.examples.crud.save' | translate }}
+            </button>
+            <button (click)="cancelEditing()" mat-raised-button>
+              {{'anms.examples.crud.cancel' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <ng-container *ngIf="!isEditing">
+        <div [ngClass]="routeAnimationsElements" *ngIf="selectedLogo$ | async as selectedLogo; else noselectedLogoTmpl">
+          <h3>{{ selectedLogo.texte }}</h3>
+
+        </div>
+
+        <ng-template #noselectedLogoTmpl>
+          <h4>Il n'y a pas de document sélectionné.</h4>
+        </ng-template>
+      </ng-container>
+
+    </div>
+  </div>
+</div>

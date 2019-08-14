@@ -1,0 +1,19 @@
+Markers
+{
+	Marker
+	{
+		Name=Loop Start
+		Pos=229
+		Type=6
+		Flags=1
+		Extra=0
+	}
+	Marker1
+	{
+		Name=Loop End
+		Pos=2758886
+		Type=7
+		Flags=1
+		Extra=0
+	}
+}

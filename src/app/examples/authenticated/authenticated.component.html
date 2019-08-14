@@ -1,0 +1,37 @@
+<div class="container" rtl>
+  <div class="row">
+    <div class="col-12">
+      <h1 class="main-heading">{{ 'anms.examples.auth.title' | translate }}</h1>
+      <p [ngClass]="routeAnimationsElements">
+        {{ 'anms.examples.auth.description1' | translate }}
+      </p>
+      <p [ngClass]="routeAnimationsElements">
+        {{ 'anms.examples.auth.description2' | translate }}
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div>
+
+    <mat-card *ngFor="let data of (cartes$|async); let i = index"  >
+        <mat-card-title>
+            {{data.carte.valeur}}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{data.carte.couleur}}
+        </mat-card-subtitle>
+        <mat-card-actions>
+           <button mat-fab color="accent" (click)="onClick(data.id)"></button>
+        </mat-card-actions>
+      </mat-card>
+
+
+
+</div>
+
+
+<button mat-raised-button color="primary" (click)="jeuServiceService.click()" >
+  click
+</button>

@@ -1,0 +1,65 @@
+h1 {
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+mat-card {
+  margin: 0 0 10px 0;
+  cursor: pointer;
+}
+
+/deep/ mat-slider{
+  width: 100%;
+}
+
+/deep/ mat-form-field{
+
+  width: 100%;
+
+}
+.mat-fab {
+  .fa-icon {
+    position: relative;
+    top: 4px;
+  }
+}
+
+.add {
+}
+
+#addButton{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom:30px;
+  margin-top: 20px;
+}
+
+.col-md-6 {
+
+  margin-bottom: 20px;
+}
+
+.red{
+  background-color: rgb(250, 150, 150);
+}
+
+.blue{
+  background-color: rgb(121, 140, 248);
+}
+
+.red2{
+  background-color: rgb(253, 205, 205);
+}
+
+.blue2{
+  background-color: rgb(172, 184, 255);
+}
+
+.green{
+  background-color: rgb(160, 253, 168);
+}
+
+.flex{
+  display:flex;
+}

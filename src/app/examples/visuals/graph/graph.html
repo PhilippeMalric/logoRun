@@ -1,0 +1,25 @@
+<div class="center">
+<svg #svg [attr.width]="_options.width" [attr.height]="_options.height" arrowDef>
+    <g [zoomableOf]="svg">
+      <g [linkVisual2]="link" *ngFor="let link of links"></g>
+      <g [nodeVisual]="node" *ngFor="let node of nodes"
+          [draggableNode]="node" [draggableInGraph]="graph"
+          >
+      </g>
+    </g>
+  </svg>
+</div>
+
+<div class="center">
+  <button type="button" mat-raised-button color="accent"
+    [ngClass]="routeAnimationsElements" (click)="clickButton()">
+    click
+  </button>
+
+  <button type="button" mat-raised-button color="accent"
+  [ngClass]="routeAnimationsElements" (click)="clickButton2()">
+  click2
+</button>
+
+</div>
+
